@@ -1,49 +1,31 @@
 
 
 $(document).ready(function(){
-    var currentDay = moment().format('LLLL');
+    // generate the date and time at the top of the screen
+
+    // need interval to reset time at the top
+    var currentDay = moment().format('dddd, MMMM Do');
     $('#currentDay').text(currentDay);
     var currentTime = moment().format("h A", "America/Denver");
     console.log(currentTime);    
 
-
+    // set hour in hour section
     $('.hour').each(function(i, obj){
         $(this).text(moment().set("hour", 8 + i).format("h A", "America/Denver"))
-        // var timeSection = moment().set("hour", 8 + i).format("h", "America/Denver");
-        // var currentTime = moment().format("h", "America/Denver");
-        
-        
-        // if(moment(timeSection).isAfter(currentTime)){
-            
-        //     $("#task-block").addClass("future")
-        // } else if(moment(timeSection).isSame(currentTime)){
-        //     $("#task-block").addClass("present")
-        // } else {
-        //     $("#task-block").addClass("past")
-        // }
     })
     timeCheck(currentTime);
 });
 
 
 // update colors throughout the day
-var timeCheck = function(time){
-    
-    // console.log("hourDiff " + hourDiff);
+var timeCheck = function(time){    
+    // loop through each .description section and determine the color based on a 24hour value starting at 8 for the workday
+    // loop ends at the end of the day because the div's end there
     $(".description").each(function(i, obj){
         var timeSection = moment().set("hour", 8 + i).format("HH", "America/Denver");
-        // var timeSection = moment().hour(8 + i);
+        
         var currentTime = moment().format("HH", "America/Denver");  
-        console.log("loop check timeSection " + timeSection);
-        console.log("loop check currentTime " + currentTime);
-        console.log(moment(currentTime).isBefore(timeSection, 'hour'));
-        console.log(moment(currentTime).isSame(timeSection, 'hour'))
-        console.log(moment(currentTime).isAfter(timeSection, 'hour'))
-
-      
-     
-
-        if(currentTime > timeSection){        
+          if(currentTime > timeSection){        
             $(this).addClass("past");
         } else if(currentTime === timeSection){
             $(this).addClass("present") 
@@ -57,4 +39,4 @@ setInterval(function(){
     var currentTime = moment().format("hh", "America/Denver");
     timeCheck(currentTime);  
     console.log("time check done") 
-     }, 300000);
+}, 3000);
