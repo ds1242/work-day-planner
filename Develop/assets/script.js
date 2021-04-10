@@ -9,21 +9,18 @@ $(document).ready(function(){
 
     $('.hour').each(function(i, obj){
         $(this).text(moment().set("hour", 8 + i).format("h A", "America/Denver"))
-        var timeSection = moment().set("hour", 8 + i).format("h A", "America/Denver");
-        var currentTime = moment().format("h A", "America/Denver");
-        console.log("loop check timeSection " + timeSection);
-        console.log("loop check currentTime " + currentTime);
-        console.log(moment(timeSection).isBefore(currentTime));
-        console.log(moment(timeSection).isSame(currentTime));
+        // var timeSection = moment().set("hour", 8 + i).format("h", "America/Denver");
+        // var currentTime = moment().format("h", "America/Denver");
         
-        if(moment(timeSection).isAfter(currentTime)){
+        
+        // if(moment(timeSection).isAfter(currentTime)){
             
-            $("#task-block").addClass("future")
-        } else if(moment(timeSection).isSame(currentTime)){
-            $("#task-block").addClass("present")
-        } else {
-            $("#task-block").addClass("past")
-        }
+        //     $("#task-block").addClass("future")
+        // } else if(moment(timeSection).isSame(currentTime)){
+        //     $("#task-block").addClass("present")
+        // } else {
+        //     $("#task-block").addClass("past")
+        // }
     })
     timeCheck(currentTime);
 });
@@ -34,13 +31,17 @@ var timeCheck = function(time){
     
     // console.log("hourDiff " + hourDiff);
     $(".description").each(function(i, obj){
-        
-        if($('.hour') > time){        
-            $(this).addClass("future");
-        } else if($('.hour') = time){
-            $(this).addClass("present") 
-        } else {
+        var timeSection = moment().set("hour", 8 + i).format("h", "America/Denver");
+        var currentTime = moment().format("h", "America/Denver");  
+        console.log("loop check timeSection " + timeSection);
+        console.log("loop check currentTime " + currentTime);
+        console.log(moment(currentTime).isAfter(timeSection));
+        if(moment(timeSection).isBefore(currentTime)){        
             $(this).addClass("past");
+        } else if(moment(timeSection).isSame(currentTime)){
+            $(this).addClass("present") 
+        } else if(moment(currentTime).isAfter(timeSection)) {
+            $(this).addClass("future");
         }
 })
 };
