@@ -12,6 +12,10 @@ textarea{
   border-left: 1px solid black;
   padding: 10px;
 }
+.iconify { 
+  width: 28px; 
+  height: 28px; 
+}
 
 .jumbotron {
   text-align: center;
@@ -66,6 +70,9 @@ textarea{
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .saveBtn i:hover {

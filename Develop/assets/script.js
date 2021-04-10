@@ -1,4 +1,4 @@
-
+// var taskList = JSON.parse(localStorage.get('taskList')) || [];
 
 $(document).ready(function(){
     // generate the date and time at the top of the screen
@@ -47,6 +47,8 @@ $('.description').on("click", function(){
     textInput.trigger("focus");
     var currentTime = moment().format("hh", "America/Denver");
     timeCheck(currentTime);  
+
+    
 })
 $('.description').on("blur", "textarea", function(){
     var text = $(this)
@@ -62,6 +64,7 @@ $('.description').on("blur", "textarea", function(){
     $(this).replaceWith(taskP);
 
 })
+
 
 };
 // interval to check time every hour and refresh colors through the day  
