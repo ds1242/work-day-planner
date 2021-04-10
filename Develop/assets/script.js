@@ -6,20 +6,19 @@ $(document).ready(function(){
 });
 
 
+// update colors throughout the day
 var timeCheck = function(time){
-    // var futureTime = moment().format("hh").add(1, 'hours');
-    var currentTime = moment().format("hh");
-    console.log(currentTime);
-    // console.log(futureTime);
-    if(moment(time).isBefore(futureTime)){
-        $('description').addClass(".future");
-    } else if(time = currentTime){
-        $('descritpion').addClass(".present")
-    } else {
-        $('description').addClass(".past");
-    }
+    $(".description").each(function(i, obj){
+        if(moment().isAfter(time)){        
+            $(this).addClass("past");
+        } else if(moment().isAfter(time)){
+            $(this).addClass("future") 
+        } else {
+            $(this).addClass("present");
+        }
+})
 };
-    
+// interval to check time every hour and refresh colors through the day  
 setInterval(function(){
     var currentTime = moment().format("hh", "America/Denver");
     
