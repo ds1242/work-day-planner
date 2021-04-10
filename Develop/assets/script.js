@@ -16,7 +16,6 @@ $(document).ready(function(){
     timeCheck(currentTime);
 });
 
-
 // update colors throughout the day
 var timeCheck = function(time){    
     // loop through each .description section and determine the color based on a 24hour value starting at 8 for the workday
@@ -33,6 +32,37 @@ var timeCheck = function(time){
             $(this).addClass("future");
         }
 })
+
+// click on description to open textarea to add tasks
+$('.description').on("click", function(){
+    var text = $(this)
+    .text()
+    .trim();
+
+    var textInput = $("<textarea>")
+    .addClass("col-md-8")
+    .val(text);
+
+    $(this).replaceWith(textInput);
+    textInput.trigger("focus");
+    var currentTime = moment().format("hh", "America/Denver");
+    timeCheck(currentTime);  
+})
+$('.description').on("blur", "textarea", function(){
+    var text = $(this)
+    .val()
+    .trim();
+
+    // recreate p element
+    var taskP = $("<p>")
+      .addClass("m-1")
+      .text(text)
+
+    // replace textarea with p element
+    $(this).replaceWith(taskP);
+
+})
+
 };
 // interval to check time every hour and refresh colors through the day  
 setInterval(function(){
