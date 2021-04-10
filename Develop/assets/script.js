@@ -31,16 +31,23 @@ var timeCheck = function(time){
     
     // console.log("hourDiff " + hourDiff);
     $(".description").each(function(i, obj){
-        var timeSection = moment().set("hour", 8 + i).format("h", "America/Denver");
-        var currentTime = moment().format("h", "America/Denver");  
+        var timeSection = moment().set("hour", 8 + i).format("HH", "America/Denver");
+        // var timeSection = moment().hour(8 + i);
+        var currentTime = moment().format("HH", "America/Denver");  
         console.log("loop check timeSection " + timeSection);
         console.log("loop check currentTime " + currentTime);
-        console.log(moment(currentTime).isAfter(timeSection));
-        if(moment(timeSection).isBefore(currentTime)){        
+        console.log(moment(currentTime).isBefore(timeSection, 'hour'));
+        console.log(moment(currentTime).isSame(timeSection, 'hour'))
+        console.log(moment(currentTime).isAfter(timeSection, 'hour'))
+
+      
+     
+
+        if(currentTime > timeSection){        
             $(this).addClass("past");
-        } else if(moment(timeSection).isSame(currentTime)){
+        } else if(currentTime === timeSection){
             $(this).addClass("present") 
-        } else if(moment(currentTime).isAfter(timeSection)) {
+        } else if(currentTime < timeSection) {
             $(this).addClass("future");
         }
 })
@@ -50,4 +57,4 @@ setInterval(function(){
     var currentTime = moment().format("hh", "America/Denver");
     timeCheck(currentTime);  
     console.log("time check done") 
-     }, 3000);
+     }, 300000);
