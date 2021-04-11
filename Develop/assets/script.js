@@ -39,8 +39,11 @@ $('.description').on("click", function(){
     .text()
     .trim();
 
+    var classList = $(this).attr("class")
+    var classArr = classList.split(/\s+/);
+    
     var textInput = $("<textarea>")
-    .addClass("col-md-8")
+    .addClass(classArr)
     .val(text);
 
     $(this).replaceWith(textInput);
@@ -49,22 +52,24 @@ $('.description').on("click", function(){
     timeCheck(currentTime);  
 
     var storage = textInput.attr("id")
-    localStorage.setItem("local", storage);
+    localStorage.setItem("taskList", JSON.stringify(storage));
     
 
 })
 $('.description').on("blur", "textarea", function(){
     var text = $(this)
-    .val()
-    .trim();
+        .val()
+        .trim();
 
-    var status =$(this)
-        .closest("")
+    // var status =$(this)
+    //     .closest(".description")
+    //     .attr("id")
+    //     .
     
     // recreate p element
     var taskP = $("<p>")
-      .addClass("m-1")
-      .text(text)
+        // .addClass("m-1")
+        .text(text)
 
     // replace textarea with p element
     $(this).replaceWith(taskP);
