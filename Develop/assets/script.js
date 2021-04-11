@@ -1,4 +1,32 @@
-
+var loadTasks = function() {
+    var taskList = JSON.parse(localStorage.getItem("taskList"));
+  
+    // if nothing in localStorage, create a new object to track all task status arrays
+    if (!taskList) {
+      taskList = {
+        descrip8: [],
+        descrip9: [],
+        descrip10: [],
+        descrip11: [],
+        descrip12: [],
+        descrip1: [],
+        descrip2: [],
+        descrip3: [],
+        descrip4: [],
+        descrip5: []
+      };
+    }
+  
+    // // loop over object properties
+    // $.each(taskList, function(list, arr) {
+    //   console.log(list, arr);
+    //   // then loop over sub-array
+    //   arr.forEach(function(task) {
+    //     createTask(task.text, task.date, list);
+    //   });
+    // });
+    console.log(taskList);
+  };
 
 $(document).ready(function(){
     // generate the date and time at the top of the screen
@@ -8,7 +36,7 @@ $(document).ready(function(){
     $('#currentDay').text(currentDay);
     var currentTime = moment().format("h A", "America/Denver");
     console.log(currentTime);    
-    var taskList = JSON.parse(localStorage.getItem('taskList')) || [];
+    // loadTasks();
     // set hour in hour section
     $('.hour').each(function(i, obj){
         $(this).text(moment().set("hour", 8 + i).format("h A", "America/Denver"))
@@ -42,22 +70,36 @@ $('.description').on("click", function(){
     var classList = $(this).attr("class")
     var classArr = classList.split(/\s+/);
     
+    var propTest = $(this).prop("id");
+    console.log(propTest);
+    
     var textInput = $("<textarea>")
     .addClass(classArr)
     .val(text);
 
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
-    var currentTime = moment().format("hh", "America/Denver");
-    timeCheck(currentTime);  
+    
+    // var textIndex = propTest;
+    // var task = $(this).text().trim();
+    // taskList = [{
+    //     propTest: propTest,
+    //     text: task
 
-    var storage = textInput.attr("id")
-    localStorage.setItem("taskList", JSON.stringify(storage));
+    // }]
+    // need to push to the array
+    // localStorage.setItem("taskList", JSON.stringify(taskList));
     
 
 })
-$('.description').on("blur", "textarea", function(){
-    var text = $(this)
+// not sure there is an issue with hover
+$('.saveBtn').hover(function(){
+    console.log($(this).index())
+})
+$('.saveBtn').on("click",function(){
+
+    // console.log(i);
+    var text = $(".description")
         .val()
         .trim();
 
@@ -65,14 +107,19 @@ $('.description').on("blur", "textarea", function(){
     //     .closest(".description")
     //     .attr("id")
     //     .
-    
+    var id = "newId";
+    var classList = $(".description").attr("class")
+    var classArr = classList.split(/\s+/);
+
     // recreate p element
-    var taskP = $("<p>")
-        // .addClass("m-1")
+    var taskP = $("<div>")
+        .addClass(classArr)
         .text(text)
+        
+        
 
     // replace textarea with p element
-    $(this).replaceWith(taskP);
+    $("textarea").replaceWith(taskP);
 
 })
 
