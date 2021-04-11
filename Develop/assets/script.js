@@ -1,4 +1,4 @@
-// var taskList = JSON.parse(localStorage.get('taskList')) || [];
+
 
 $(document).ready(function(){
     // generate the date and time at the top of the screen
@@ -8,7 +8,7 @@ $(document).ready(function(){
     $('#currentDay').text(currentDay);
     var currentTime = moment().format("h A", "America/Denver");
     console.log(currentTime);    
-
+    var taskList = JSON.parse(localStorage.getItem('taskList')) || [];
     // set hour in hour section
     $('.hour').each(function(i, obj){
         $(this).text(moment().set("hour", 8 + i).format("h A", "America/Denver"))
@@ -32,7 +32,7 @@ var timeCheck = function(time){
             $(this).addClass("future");
         }
 })
-
+};
 // click on description to open textarea to add tasks
 $('.description').on("click", function(){
     var text = $(this)
@@ -48,13 +48,19 @@ $('.description').on("click", function(){
     var currentTime = moment().format("hh", "America/Denver");
     timeCheck(currentTime);  
 
+    var storage = textInput.attr("id")
+    localStorage.setItem("local", storage);
     
+
 })
 $('.description').on("blur", "textarea", function(){
     var text = $(this)
     .val()
     .trim();
 
+    var status =$(this)
+        .closest("")
+    
     // recreate p element
     var taskP = $("<p>")
       .addClass("m-1")
@@ -66,7 +72,7 @@ $('.description').on("blur", "textarea", function(){
 })
 
 
-};
+
 // interval to check time every hour and refresh colors through the day  
 setInterval(function(){
     var currentTime = moment().format("hh", "America/Denver");
