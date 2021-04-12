@@ -4,7 +4,7 @@ body {
   line-height: 1;
 }
 
-textarea{
+textarea {
   background: transparent;
   border: none;
   resize: none;
@@ -38,7 +38,7 @@ textarea{
 .row {
   white-space: pre-wrap;
   height: 80px;
-  border-top: 1px solid white;;
+  border-top: 1px solid white;
 }
 
 .hour {
@@ -52,17 +52,20 @@ textarea{
 
 .past {
   background-color: #d3d3d3;
-  color: white;
+  color: black;
+  padding: 10px;
 }
 
 .present {
   background-color: #ff6961;
-  color: white;
+  color: black
+  padding: 10px;
 }
 
 .future {
   background-color: #77dd77;
-  color: white;
+  color:black;
+  padding:10px;
 }
 
 .saveBtn {
