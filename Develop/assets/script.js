@@ -62,7 +62,7 @@ var timeCheck = function(time){
 })
 };
 // click on description to open textarea to add tasks
-$('.description').on("click", function(event){
+$('.row').on("click", ".description", function(event){
     event.preventDefault();
     
     var text = $(this)
@@ -72,7 +72,7 @@ $('.description').on("click", function(event){
     var classList = $(this).attr("class")
     var classArr = classList.split(/\s+/);
     
-    // var propTest = $(this).prop("id");
+    var propTest = $(this).prop("id");
     // console.log(propTest);
     
     var textInput = $("<textarea>")
@@ -95,10 +95,7 @@ $('.description').on("click", function(event){
     
 
 })
-// not sure there is an issue with hover
-$('.saveBtn').hover(function(){
-    console.log($(this).index())
-})
+
 $('.saveBtn').on("click", function(event){
     event.preventDefault();
     // console.log(i);
