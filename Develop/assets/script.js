@@ -97,8 +97,8 @@ $('.description').on("click", function(){
 $('.saveBtn').hover(function(){
     console.log($(this).index())
 })
-$('.saveBtn').on("click", function(){
-
+$('.saveBtn').on("click", function(event){
+    event.preventDefault();
     // console.log(i);
     var text = $(".text-area")
         .val()
@@ -111,9 +111,10 @@ $('.saveBtn').on("click", function(){
     // recreate div element
     var taskDiv = $("<div>")
         .addClass(classArr)
+        .removeClass("text-area")
         .text(text)      
         
-
+    // $(taskDiv).add("<p>").addClass("pvalue");
     // replace textarea with div element
     $(".text-area").replaceWith(taskDiv);
     
