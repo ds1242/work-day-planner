@@ -75,7 +75,7 @@ textarea{
   align-items: center;
 }
 
-.saveBtn i:hover {
+.saveBtn:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
   background-color: #000000;

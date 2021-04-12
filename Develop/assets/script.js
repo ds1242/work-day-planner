@@ -62,7 +62,9 @@ var timeCheck = function(time){
 })
 };
 // click on description to open textarea to add tasks
-$('.description').on("click", function(){
+$('.description').on("click", function(event){
+    event.preventDefault();
+    
     var text = $(this)
     .text()
     .trim();
