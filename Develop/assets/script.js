@@ -78,7 +78,8 @@ $('.row').on("click", ".description", function(event){
     var textInput = $("<textarea>")
     .addClass(classArr)
     .addClass("text-area")
-    .val(text);
+    .val(text)
+    .attr("id", propTest);
 
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
@@ -103,7 +104,9 @@ $('.saveBtn').on("click", function(event){
         .val()
         .trim();
 
-    var id = "newId";
+    var id = $(".text-area").prop("id");
+    
+
     var classList = $(".text-area").attr("class")
     var classArr = classList.split(/\s+/);
 
@@ -111,7 +114,8 @@ $('.saveBtn').on("click", function(event){
     var taskDiv = $("<div>")
         .addClass(classArr)
         .removeClass("text-area")
-        .text(text)      
+        .text(text)
+        .attr("id", id);      
         
     // $(taskDiv).add("<p>").addClass("pvalue");
     // replace textarea with div element
