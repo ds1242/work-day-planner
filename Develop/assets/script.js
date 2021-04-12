@@ -70,11 +70,12 @@ $('.description').on("click", function(){
     var classList = $(this).attr("class")
     var classArr = classList.split(/\s+/);
     
-    var propTest = $(this).prop("id");
-    console.log(propTest);
+    // var propTest = $(this).prop("id");
+    // console.log(propTest);
     
     var textInput = $("<textarea>")
     .addClass(classArr)
+    .addClass("text-area")
     .val(text);
 
     $(this).replaceWith(textInput);
@@ -96,30 +97,26 @@ $('.description').on("click", function(){
 $('.saveBtn').hover(function(){
     console.log($(this).index())
 })
-$('.saveBtn').on("click",function(){
+$('.saveBtn').on("click", function(){
 
     // console.log(i);
-    var text = $(".description")
+    var text = $(".text-area")
         .val()
         .trim();
 
-    // var status =$(this)
-    //     .closest(".description")
-    //     .attr("id")
-    //     .
     var id = "newId";
-    var classList = $(".description").attr("class")
+    var classList = $(".text-area").attr("class")
     var classArr = classList.split(/\s+/);
 
-    // recreate p element
-    var taskP = $("<div>")
+    // recreate div element
+    var taskDiv = $("<div>")
         .addClass(classArr)
-        .text(text)
-        
+        .text(text)      
         
 
-    // replace textarea with p element
-    $("textarea").replaceWith(taskP);
+    // replace textarea with div element
+    $(".text-area").replaceWith(taskDiv);
+    
 
 })
 
