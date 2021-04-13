@@ -1,3 +1,15 @@
+taskList = {
+    descrip8: [],
+    descrip9: [],
+    descrip10: [],
+    descrip11: [],
+    descrip12: [],
+    descrip1: [],
+    descrip2: [],
+    descrip3: [],
+    descrip4: [],
+    descrip5: []
+  };
 var loadTasks = function() {
     var taskList = JSON.parse(localStorage.getItem("taskList"));
   
@@ -36,7 +48,7 @@ $(document).ready(function(){
     $('#currentDay').text(currentDay);
     var currentTime = moment().format("h A", "America/Denver");
     console.log(currentTime);    
-    // loadTasks();
+    loadTasks();
     // set hour in hour section
     $('.hour').each(function(i, obj){
         $(this).text(moment().set("hour", 8 + i).format("h A", "America/Denver"))
@@ -68,19 +80,19 @@ $('.row').on("click", ".description", function(event){
     var text = $(this)
     .text()
     .trim();
-
+    // get all classes attached to div to add to new text area
     var classList = $(this).attr("class")
     var classArr = classList.split(/\s+/);
-    
+    // get id 
     var propTest = $(this).prop("id");
-    // console.log(propTest);
     
+    // create text area and attach classes, text, and id
     var textInput = $("<textarea>")
     .addClass(classArr)
     .addClass("text-area")
     .val(text)
     .attr("id", propTest);
-
+    // replace div with text area 
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
     
@@ -106,7 +118,7 @@ $('.saveBtn').on("click", function(event){
 
     var id = $(".text-area").prop("id");
     
-
+    // get all classes attached to the text area to put into the new div element
     var classList = $(".text-area").attr("class")
     var classArr = classList.split(/\s+/);
 
@@ -117,9 +129,10 @@ $('.saveBtn').on("click", function(event){
         .text(text)
         .attr("id", id);      
         
-    // $(taskDiv).add("<p>").addClass("pvalue");
     // replace textarea with div element
     $(".text-area").replaceWith(taskDiv);
+    console.log(taskList.descrip1);
+    localStorage.setItem("taskList", JSON.stringify(taskDiv));
     
 
 })
