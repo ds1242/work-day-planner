@@ -1,17 +1,4 @@
-taskList = {
-    descrip8: [],
-    descrip9: [],
-    descrip10: [],
-    descrip11: [],
-    descrip12: [],
-    descrip1: [],
-    descrip2: [],
-    descrip3: [],
-    descrip4: [],
-    descrip5: []
-  };
-var loadTasks = function() {
-    var taskList = JSON.parse(localStorage.getItem("taskList"));
+var taskList = JSON.parse(localStorage.getItem("taskList"));
   
     // if nothing in localStorage, create a new object to track all task status arrays
     if (!taskList) {
@@ -27,16 +14,19 @@ var loadTasks = function() {
         descrip4: [],
         descrip5: []
       };
-    }
+    };
+console.log(taskList);    
+var loadTasks = function(taskList) {
+    
   
-    // // loop over object properties
-    // $.each(taskList, function(list, arr) {
-    //   console.log(list, arr);
-    //   // then loop over sub-array
-    //   arr.forEach(function(task) {
-    //     createTask(task.text, task.date, list);
-    //   });
-    // });
+    // loop over object properties
+    $.each(taskList, function(list, arr) {
+      console.log(list, arr);
+      // then loop over sub-array
+      arr.forEach(function(task) {
+        createTask(task.text, task.date, list);
+      });
+    });
     console.log(taskList);
   };
 
@@ -48,7 +38,7 @@ $(document).ready(function(){
     $('#currentDay').text(currentDay);
     var currentTime = moment().format("h A", "America/Denver");
     console.log(currentTime);    
-    loadTasks();
+    loadTasks(taskList);
     // set hour in hour section
     $('.hour').each(function(i, obj){
         $(this).text(moment().set("hour", 8 + i).format("h A", "America/Denver"))
@@ -96,16 +86,6 @@ $('.row').on("click", ".description", function(event){
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
     
-    // var textIndex = propTest;
-    // var task = $(this).text().trim();
-    // taskList = [{
-    //     propTest: propTest,
-    //     text: task
-
-    // }]
-    // need to push to the array
-    // localStorage.setItem("taskList", JSON.stringify(taskList));
-    
 
 })
 
@@ -131,9 +111,23 @@ $('.saveBtn').on("click", function(event){
         
     // replace textarea with div element
     $(".text-area").replaceWith(taskDiv);
-    console.log(taskList.descrip1);
-    localStorage.setItem("taskList", JSON.stringify(taskDiv));
     
+    var tempArr = []
+    var arrName = $(".description").attr("id")
+    
+
+    tempArr.push({
+        id: arrName,
+        text: text
+    })
+
+    
+    taskList[arrName] = tempArr;
+    console.log(text);
+    console.log(arrName);
+    console.log(taskList[arrName]);
+    
+    localStorage.setItem('taskList', JSON.stringify(taskList));
 
 })
 
