@@ -1,38 +1,22 @@
 var taskList = JSON.parse(localStorage.getItem("taskList"));
-  
+
     // if nothing in localStorage, create a new object to track all task status arrays
     if (!taskList) {
-      taskList = {
-        // descrip8: [],
-        // descrip9: [],
-        // descrip10: [],
-        // descrip11: [],
-        // descrip12: [],
-        // descrip1: [],
-        // descrip2: [],
-        // descrip3: [],
-        // descrip4: [],
-        // descrip5: []
-      };
+      taskList = [];
     };
-console.log(taskList);    
-var loadTasks = function(taskList) {
-    
-  
+// function to load the tasks saved in local storage  
+var loadTasks = function(taskList) { 
     // loop over object properties
-    $.each(taskList, function(list, arr) {
-      console.log(list, arr);
-      // then loop over sub-array
-    //   arr.forEach(function(task) {
-    //     createTask(task.text, task.date, list);
-    //   });
-    });
-    console.log(taskList);
+    $.each(taskList, function(id, arr) {
+    // set the div id based on the array id
+      var divId = "#" + id;
+    //   set the text value of the div ids from saved tasks in local storage
+      $(divId).text(arr);     
+    });    
   };
-
+// load certain items when the page opens and run the initial time check
 $(document).ready(function(){
     // generate the date and time at the top of the screen
-
     // need interval to reset time at the top
     var currentDay = moment().format('dddd, MMMM Do');
     $('#currentDay').text(currentDay);
@@ -61,7 +45,7 @@ var timeCheck = function(time){
         } else if(currentTime < timeSection) {
             $(this).addClass("future");
         }
-})
+    })
 };
 // click on description to open textarea to add tasks
 $('.row').on("click", ".description", function(event){
@@ -88,52 +72,50 @@ $('.row').on("click", ".description", function(event){
     
 
 })
-
+// click on the save button to save the task
 $('.saveBtn').on("click", function(event){
     event.preventDefault();
     // console.log(i);
-    var text = $(".text-area")
-        .val()
-        .trim();
+    if($(".text-area").val() === undefined){
+        return;
+    } else {
+        var text = $(".text-area")
+            .val()
+            .trim();
 
-    var id = $(".text-area").prop("id");
-    
-    // get all classes attached to the text area to put into the new div element
-    var classList = $(".text-area").attr("class")
-    var classArr = classList.split(/\s+/);
-
-    // recreate div element
-    var taskDiv = $("<div>")
-        .addClass(classArr)
-        .removeClass("text-area")
-        .text(text)
-        .attr("id", id);      
-       
-    // replace textarea with div element
-    $(".text-area").replaceWith(taskDiv);
-    
-    // create temp array to store
-    var tempArr = []
-      
-    tempArr.push({
-        id: id,
-        text: text
-    })
+        var id = $(".text-area").prop("id");
         
-    taskList[id] = tempArr;
-    console.log(text);
-    console.log(id);
-    console.log(taskList[id]);
-    
-    localStorage.setItem('taskList', JSON.stringify(taskList));
+        // get all classes attached to the text area to put into the new div element
+        var classList = $(".text-area").attr("class")
+        var classArr = classList.split(/\s+/);
 
+        // recreate div element
+        var taskDiv = $("<div>")
+            .addClass(classArr)
+            .removeClass("text-area")
+            .text(text)
+            .attr("id", id);      
+        
+        // replace textarea with div element
+        $(".text-area").replaceWith(taskDiv);
+        
+        // create temp array to store
+        var tempArr = []
+        // push text to temp array
+        tempArr.push(text);
+        // set to storage array   
+        taskList[id] = tempArr;
+        // store in localstorage
+        localStorage.setItem('taskList', JSON.stringify(taskList));
+    }
 })
 
 
 
 // interval to check time every hour and refresh colors through the day  
+// checks every half hour
 setInterval(function(){
     var currentTime = moment().format("hh", "America/Denver");
     timeCheck(currentTime);  
     console.log("time check done") 
-}, 3000);
+}, 1800000);
