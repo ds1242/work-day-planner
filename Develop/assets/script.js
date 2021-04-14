@@ -3,16 +3,16 @@ var taskList = JSON.parse(localStorage.getItem("taskList"));
     // if nothing in localStorage, create a new object to track all task status arrays
     if (!taskList) {
       taskList = {
-        descrip8: [],
-        descrip9: [],
-        descrip10: [],
-        descrip11: [],
-        descrip12: [],
-        descrip1: [],
-        descrip2: [],
-        descrip3: [],
-        descrip4: [],
-        descrip5: []
+        // descrip8: [],
+        // descrip9: [],
+        // descrip10: [],
+        // descrip11: [],
+        // descrip12: [],
+        // descrip1: [],
+        // descrip2: [],
+        // descrip3: [],
+        // descrip4: [],
+        // descrip5: []
       };
     };
 console.log(taskList);    
@@ -108,24 +108,22 @@ $('.saveBtn').on("click", function(event){
         .removeClass("text-area")
         .text(text)
         .attr("id", id);      
-        
+       
     // replace textarea with div element
     $(".text-area").replaceWith(taskDiv);
     
+    // create temp array to store
     var tempArr = []
-    var arrName = $(".description").attr("id")
-    
-
+      
     tempArr.push({
-        id: arrName,
+        id: id,
         text: text
     })
-
-    
-    taskList[arrName] = tempArr;
+        
+    taskList[id] = tempArr;
     console.log(text);
-    console.log(arrName);
-    console.log(taskList[arrName]);
+    console.log(id);
+    console.log(taskList[id]);
     
     localStorage.setItem('taskList', JSON.stringify(taskList));
 
