@@ -35,8 +35,7 @@ var timeCheck = function(time){
     // loop through each .description section and determine the color based on a 24hour value starting at 8 for the workday
     // loop ends at the end of the day because the div's end there
     $(".description").each(function(i, obj){
-        var timeSection = moment().set("hour", 8 + i).format("HH", "America/Denver");
-        
+        var timeSection = moment().set("hour", 8 + i).format("HH", "America/Denver");        
         var currentTime = moment().format("HH", "America/Denver");  
           if(currentTime > timeSection){        
             $(this).addClass("past");
